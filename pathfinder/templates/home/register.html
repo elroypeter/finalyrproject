@@ -1,0 +1,29 @@
+{% extends 'layout.html' %}
+{% import "bootstrap/utils.html" as utils %}
+{% import "bootstrap/wtf.html" as wtf %}
+{% block content %}
+    {% include '/partials/topnav.html' %}
+    {% include '/partials/mobiletop.html' %}
+    {% include '/partials/navbar.html' %}
+
+    <div class="container" style="min-height:80vh;">
+        <div class="row">
+        <div class="col-lg-8">
+            <div class="alert alert-warning">
+            <h4>Hello, When you register a user, you must give them powers to execute tasks.
+              They will be given powers to add crimes by default.</h4>
+             </div>
+        <div class="content-section">
+            <br/>
+            {{ utils.flashed_messages() }}
+            <br/>
+            <div class="center">
+              <h1>Register the users to use the System.</h1>
+              <hr/>
+              {{ wtf.quick_form(form) }}
+            </div>
+          </div>
+          </div>
+          </div>
+    </div>
+{% endblock %}
