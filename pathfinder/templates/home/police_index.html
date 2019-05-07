@@ -6,7 +6,7 @@
     {% include '/partials/mobiletop.html' %}
     {% include '/partials/navbar.html' %}
 
-    <div class="container" style="height:80vh;">
+    <div class="container" style="min-height:80vh;">
         <div class="row">
         <div class="col-lg-10 col-md-10">
         <div class="content-section">
@@ -37,7 +37,7 @@
               <th>Action</th>
           
           <tbody>
-              {% for station in policestation %}
+              {% for station in police_stations %}
                 <tr>
                     <td>{{ station.id }}</td>
                     <td>{{ station.StationName }}</td>

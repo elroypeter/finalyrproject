@@ -1,7 +1,7 @@
 from flask_wtf import FlaskForm
 from wtforms import PasswordField, StringField, SubmitField, ValidationError
 from wtforms.validators import DataRequired, Email, EqualTo
-from ..model import Category,Crime,CrimeScene
+from ..model import Category,CrimeScene
 
 class CrimeCategory(FlaskForm):
     """
