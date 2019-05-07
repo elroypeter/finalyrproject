@@ -1,7 +1,6 @@
 # AUTOMATED CRIME REPORT VISUALISATION AND SECURE PATH PREDICTION
-plotting data on maps
 
-The complete code for my final project, *AUTOMATED CRIME REPORT VISUALISATION AND SECURE PATH PREDICTION*, which will be hosted with digital ocean soon.
+The partial code for my final project, *AUTOMATED CRIME REPORT VISUALISATION AND SECURE PATH PREDICTION*, which will be hosted with digital ocean soon.
 
 ## Installation and Set Up
 Prerequisites:
@@ -64,7 +63,7 @@ You can now run the app with the following command: `flask run`
 
 ## Credits and License
 
-Copyright (c) 2017 [Davis67](https://github.com/davis67)
+Copyright (c) 2019 [davis67](https://github.com/davis67)
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
