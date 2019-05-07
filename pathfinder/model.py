@@ -1,10 +1,11 @@
 from datetime import datetime
+from werkzeug.security import generate_password_hash, check_password_hash
 from pathfinder import db, login_manager
 from flask_login import UserMixin
 
-# @login_manager.user_loader
-# def load_user(user_id):
-#     return User.get(user_id)
+@login_manager.user_loader
+def load_user(id):
+    return User.query.get(int(id))
 
 class User(db.Model, UserMixin):
 
@@ -62,43 +63,33 @@ class CrimeScene(db.Model):
     id          = db.Column(db.Integer, primary_key=True)
     longitude   = db.Column(db.Float, nullable=False)
     latitude    = db.Column(db.Float, nullable=False)
-    decription  = db.Column(db.Text, nullable=False)
-    image_file  = db.Column(db.String(50), nullable=False)
+    description  = db.Column(db.Text, nullable=False)
+    image_file  = db.Column(db.String(50), nullable=True)
     date_posted = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
     user_id     = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    police_id   = db.Column(db.Integer, db.ForeignKey('police.id'), nullable=False)
     category_id    = db.Column(db.Integer, db.ForeignKey('categories.id'), nullable=False)
-    crime    = db.relationship('Crime', backref='crimescene', lazy=True)
-
-    def serialize_to_json(self):
-        return {
-            'longitude'  : self.longitude,
-            'latitude'   : self.latitude,
-            'description': self.decription,
-            'image'      : self.image_file,
-            'category'   : self.category,
-            'date'       : self.date_posted
-        }
+    location = db.Column(db.String(60), nullable=False)
+    # def serialize_to_json(self):
+    #     return {
+    #         'longitude'  : self.longitude,
+    #         'latitude'   : self.latitude,
+    #         'description': self.description,
+    #         'image'      : self.image_file,
+    #         'category'   : self.category,
+    #         'date'       : self.date_posted
+    #     }
 
     def __repr__(self):
-        return f"CaseFile('{self.category}', '{self.date_posted}'"
+        return '<CrimeScene: {}>'.format(self.description, self.location)
 
 class Category(db.Model):
 
     __tablename__ ="categories"
 
     id = db.Column(db.Integer, primary_key = True)
-    violet_type = db.Column(db.String, nullable=False)
+    violet_type = db.Column(db.String(60), nullable=False)
     crimescene    = db.relationship('CrimeScene', backref='scene', lazy=True)
-    crime    = db.relationship('Crime', backref='category', lazy=True)
-
-class Crime(db.Model):
-
-    __tablename__="crimes"
-
-    id = db.Column(db.Integer, primary_key = True)
-    description = db.Column(db.String(60), nullable=False)
-    category_id    = db.Column(db.Integer, db.ForeignKey('categories.id'), nullable=False)
-    scene_id    = db.Column(db.Integer, db.ForeignKey('crimescenes.id'), nullable=False)
 
 class Police(db.Model):
 
@@ -108,3 +99,4 @@ class Police(db.Model):
     StationName = db.Column(db.String(100), nullable=False)
     division = db.Column(db.String(60), nullable=False)
     crimescene    = db.relationship('CrimeScene', backref='policeonscene', lazy=True)
+    user    = db.relationship('User', backref='officer', lazy=True)
