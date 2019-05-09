@@ -70,6 +70,9 @@ class CrimeScene(db.Model):
     police_id   = db.Column(db.Integer, db.ForeignKey('police.id'), nullable=False)
     category_id    = db.Column(db.Integer, db.ForeignKey('categories.id'), nullable=False)
     location = db.Column(db.String(60), nullable=False)
+    #arrest- false
+    #domestic -true
+    #year
     # def serialize_to_json(self):
     #     return {
     #         'longitude'  : self.longitude,
