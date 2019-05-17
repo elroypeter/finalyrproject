@@ -61,8 +61,8 @@ class CrimeScene(db.Model):
     __tablename__ = "crimescenes"
 
     id          = db.Column(db.Integer, primary_key=True)
-    longitude   = db.Column(db.String, nullable=False)
-    latitude    = db.Column(db.String, nullable=False)
+    longitude   = db.Column(db.String(128), nullable=False)
+    latitude    = db.Column(db.String(128), nullable=False)
     description  = db.Column(db.Text, nullable=False)
     image_file  = db.Column(db.String(50), nullable=True)
     date_posted = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
