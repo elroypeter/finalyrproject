@@ -25,7 +25,7 @@ def register():
         flash('You have successively registered! You may now login.')
 
     #redirect to the login page
-    return render_template('auth/register.html', form=form, title="Register")
+    return render_template('home/register.html', form=form, title="Register")
 
 @auth.route('/login', methods=['GET', 'POST'])
 def login():
