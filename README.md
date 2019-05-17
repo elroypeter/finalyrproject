@@ -56,7 +56,7 @@ Set the FLASK_APP and FLASK_CONFIG variables as follows:
 * `export FLASK_APP=run.py`
 * `export FLASK_CONFIG=development`
 
-You can now run the app with the following command: `flask run` or `python -m flask run`
+You can now run the app with the following command: `$flask run` or `$python -m flask run`
 
 ## Built With...
 * [Flask](http://flask.pocoo.org/)
