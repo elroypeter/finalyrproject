@@ -8,10 +8,6 @@ from flask_login import login_user, current_user, logout_user
 #   final String url = "http://192.168.43.197:5000/web/PathFinder/v1.0/getcrime_api";
 #   final String url2 = "http://192.168.43.197:5000/web/PathFinder/v1.0/postcrime_api";
 
-# @app.route('/')
-# @app.route('/home')
-# def index():
-#     return render_template('/pages/index.html')
 
 # API end points for servicing web app
 @app.route('/web/PathFinder/v1.0/getcrime_api', methods=['GET'])
@@ -87,6 +83,32 @@ def register_user():
     db.session.add(user)
     db.session.commit()
     return jsonify({'response':'user created'})
+
+
+@app.route('/web/PathFinder/v1.0/data/to-day')
+def collect_data_today():
+    datemask = '%m/%d/%Y'
+    today = datetime.datetime.strftime(datetime.datetime.today(),datemask)
+    today_cases = CaseFile.query.filter_by(date_posted = today)
+    labels = ['thefty','Murder','kidnap','robbery']
+    actual_data = [ 40,2,10,30]
+    crimesdata = {
+        'labels':labels,
+        'data': actual_data
+    }
+    print('request made.............\n ')
+    return jsonify({'crimesdata':crimesdata})
+
+@app.route('/web/PathFinder/v1.0/data/')
+def collect_data():
+    casesData = {
+        'thefty':CaseFile.query.filter_by(category = 'thefty').count(),
+        'murder':CaseFile.query.filter_by(category = 'murder').count(),
+        'kidnap':CaseFile.query.filter_by(category = 'kidnap').count(),
+        'robbery':CaseFile.query.filter_by(category = 'robbery').count()
+    }
+    return jsonify({'casesData':casesData})
+
 
 
 @app.route('/web/PathFinder/v1.0/logout')

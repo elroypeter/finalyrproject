@@ -56,7 +56,7 @@ def register_user():
         user = User(
                     email = form.email.data,
                     full_names= form.full_names.data,
-                    telephone =form.telephone.data
+                    telephone =form.telephone.data,
                     password = form.password.data
                     )
         #add employee to the database
