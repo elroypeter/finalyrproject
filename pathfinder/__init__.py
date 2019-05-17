@@ -4,6 +4,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
 from flask_migrate import Migrate
 from flask_bootstrap import Bootstrap
+import flask_excel as excel
 
 #local imports
 from config import app_config
@@ -15,9 +16,10 @@ login_manager = LoginManager()
 def create_app(config_name):
     app = Flask(__name__, instance_relative_config = True)
     app.config.from_object(app_config[config_name])
+    app.config['UPLOAD_FOLDER'] = app.config.from_object(app_config['image_config'])
     app.config.from_pyfile('config.py')
     db.init_app(app)
-
+    excel.init_excel(app)
     login_manager.init_app(app)
     login_manager.login_message = "You must be logged in to access this Page"
     login_manager.login_view = "auth.login"
