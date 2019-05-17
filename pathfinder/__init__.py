@@ -26,6 +26,7 @@ def create_app(config_name):
     migrate = Migrate(app, db)
     Bootstrap(app)
     from pathfinder import model
+
     #admin
     from .admin import admin as admin_blueprint
     app.register_blueprint(admin_blueprint,url_prefix='/admin')

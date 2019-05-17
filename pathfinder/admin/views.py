@@ -6,7 +6,6 @@ from flask_login import current_user, login_required
 from . import admin
 
 
-
 def check_admin():
     """
     Prevent non-admins from accessing the page
