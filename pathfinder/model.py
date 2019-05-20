@@ -84,6 +84,7 @@ class Category(db.Model):
     violet_type = db.Column(db.String(60), nullable=False)
     crimescene    = db.relationship('CrimeScene', backref='scene', lazy=True)
 
+
 class Police(db.Model):
 
     __tablename__ = "police"

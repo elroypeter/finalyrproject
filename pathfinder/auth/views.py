@@ -65,4 +65,4 @@ def logout():
     flash('You have successively been logged out.')
 
     #redirect to the login page
-    return redirect(url_for('home.index'))
+    return redirect(url_for('auth.login'))
