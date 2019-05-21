@@ -4,7 +4,7 @@ from flask_login import login_manager,login_required, current_user
 from werkzeug.utils import secure_filename
 import flask_excel as excel
 from .forms import CrimeCategory
-from ..model import Category, Police,CrimeScene
+from ..model import Category, Police, CrimeScene
 from .. import db
 from . import crimes
 from collections import OrderedDict
@@ -14,8 +14,8 @@ excel.init_excel(app)
 @crimes.route('/admin/crime-category', methods=['POST','GET'])
 # @login_required
 def crimeCategory():
-    if not current_user.is_admin:
-        abort(403)
+    # if not current_user.is_admin:
+    #     abort(403)
     form = CrimeCategory()
     if form.validate_on_submit():
         category = Category(violet_type = form.violet_type.data)
@@ -31,8 +31,8 @@ def crimeCategory():
 @crimes.route('/admin/add-crime', methods=['POST', 'GET'])
 # @login_required
 def addCrime():
-    if not current_user.is_admin:
-        abort(403)
+    # if not current_user.is_admin:
+    #     abort(403)
     if request.form:
         # print(request.form)
         crime = CrimeScene(longitude = request.form.get("longitude"),
@@ -108,3 +108,12 @@ def store_excel_data():
     # return render_template('crimes/add_crime_excel.html',
     #                         title="Add Excel Data")
     pass
+
+@crimes.route('/admin/view_crimes')
+@login_required
+def view_crimes():
+    allcrimes = CrimeScene.query.all()
+    return render_template('crimes/view_crimes.html',
+                            allcrimes=allcrimes,
+                            title = "View Crimes"
+                            )

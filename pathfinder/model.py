@@ -71,7 +71,7 @@ class CrimeScene(db.Model):
     category_id    = db.Column(db.Integer, db.ForeignKey('categories.id'), nullable=False)
     location = db.Column(db.String(60), nullable=False)
     arrest = db.Column(db.Boolean, default=False)
-    domestic = db.Column(db.Boolean)
+    domestic = db.Column(db.Boolean, default=False)
 
     def __repr__(self):
         return '<CrimeScene: {}>'.format(self.description, self.location)
