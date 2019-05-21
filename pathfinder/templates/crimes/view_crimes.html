@@ -1,0 +1,58 @@
+{% extends 'layout.html' %}
+{% import "bootstrap/utils.html" as utils %}
+{% block content %}
+    {% include '/partials/topnav.html' %}
+    {% include '/partials/mobiletop.html' %}
+    {% include '/partials/navbar.html' %}
+
+    <div class="container" style="min-height:80vh;">
+        <div class="row">
+        <div class="col-lg-12">
+        <div class="content-section">
+            <br/>
+            {{ utils.flashed_messages() }}
+            <br/>
+            <div class="center">
+              <h2>View Data from Different crime Scenes</h2>
+              <hr/>
+              <table class="table table-bordered" style="margin-top:100px;">
+                <th>#</th>
+                <th>Crime Category</th>
+                <th>Crime Description</th>
+                <th>Police Station</th>
+                <th>Location</th>
+                <th>Domestic</th>
+                <th>Arrest</th>
+                <th>Action</th>
+            
+            <tbody>
+                {% for crime in allcrimes %}
+                  <tr>
+                      <td>{{ crime.id }}</td>
+                      <td>{{crime.scene.violet_type}}</td>
+                      <td>{{ crime.description }}</td>
+                      <td>{{crime.policeonscene.StationName}}</td>
+                      <td>{{ crime.location }}</td>
+                      
+                        {% if crime.domestic == 1 %}
+                        <td>True</td>
+                        {% else %}
+                        <td>False</td>
+                        {% endif %}
+                        {% if crime.arrest == 1 %}
+                        <td>True</td>
+                        {% else %}
+                        <td>False</td>
+                        {% endif %}
+                      <td>Edit|Delete</td>
+                  </tr>
+                  {% endfor %}
+            </tbody>
+          </table>
+            </div>
+          </div>
+          </div>
+          </div>
+    </div>
+
+{% endblock %}
