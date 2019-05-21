@@ -14,8 +14,8 @@ def fetch_housing_data(housing_url=HOUSING_URL, housing_path=HOUSING_PATH):
     housing_tgz = tarfile.open(tgz_path)
     housing_tgz.extractall(path=housing_path)
     housing_tgz.close()
-    
-fetch_housing_data()
+
+#fetch_housing_data()
 import pandas as pd
 
 def load_housing_data(housing_path=HOUSING_PATH):
@@ -29,7 +29,7 @@ housingv2 = housing[(housing['median_income'] <= 10)]
 # print(housingv2.size)
 # type(housing.latitude.tolist())
 
-from bokeh.io import output_file, output_notebook, show
+from bokeh.io import output_file, output_notebook, show, save
 from bokeh.models import (
   GMapPlot, GMapOptions, ColumnDataSource, Circle, LogColorMapper, BasicTicker, ColorBar,
     Range1d, PanTool, WheelZoomTool, BoxSelectTool
@@ -42,7 +42,7 @@ map_options = GMapOptions(lat=0.3132008, lng=32.5290843, map_type="roadmap", zoo
 
 plot = GMapPlot(x_range=Range1d(), y_range=Range1d(), map_options=map_options)
 
-plot.title.text = "Hey look! It's a scatter plot on a map!"
+plot.title.text = "Crimes visualizing center"
 
 # For GMaps to function, Google requires you obtain and enable an API key:
 #
@@ -75,10 +75,12 @@ plot.add_layout(color_bar, 'right')
 
 plot.add_tools(PanTool(), WheelZoomTool(), BoxSelectTool())
 
-show(plot)
-
 def showmap():
-    output_file("gmap_plot.html")
+    BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    storage_path = os.path.join(BASE_DIR, 'pathfinder/templates/pages')
+    map_path = os.path.join(storage_path, 'gmap_plot.html')
+    output_file(map_path)
+    print("saved...")
+    save(plot)
 
 # output_notebook()
-
