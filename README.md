@@ -64,10 +64,9 @@ Open the application in your terminal and run the following commands:
 * `from pathfinder import db`
 * `admin = User(email="admin@admin.com", full_names="admin CrimeFinder", password="admin@123", is_admin=True)`
 * `db.session.add(admin)`
-* `db.session.commit`
+* `db.session.commit()`
 
 You can now run the app with the following command: `flask run` or `python -m flask run`
-
 ## Built With...
 * [Flask](http://flask.pocoo.org/)
 
