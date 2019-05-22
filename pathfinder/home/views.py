@@ -29,10 +29,10 @@ def admin_dashboard():
     return render_template('home/admin_dashboard.html', title="dashboard")
 
 @home.route('/admin/policestation', methods=['POST', 'GET'])
-@login_required
+# @login_required
 def police_station_data():
-    if not current_user.is_admin:
-        abort(403)
+    # if not current_user.is_admin:
+    #     abort(403)
     form = AddPoliceStationForm()
     if form.validate_on_submit():
         police_station = Police(StationName = form.StationName.data,
