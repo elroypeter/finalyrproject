@@ -4,7 +4,8 @@ from .forms import LoginForm, AddPoliceStationForm,RegistrationForm
 from ..model import Police, User, Category, CrimeScene
 from .. import db
 from . import home
-from ..PlotDataOnmap import showmap
+from ..PlotData import showmap
+
 
 @home.route('/',methods=['GET', 'POST'])
 def homepage():
