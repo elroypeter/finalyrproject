@@ -5,7 +5,6 @@ from flask_login import LoginManager
 from flask_migrate import Migrate
 from flask_bootstrap import Bootstrap
 import flask_excel as excel
-
 #local imports
 from config import app_config
 
@@ -26,10 +25,11 @@ def create_app(config_name):
     migrate = Migrate(app, db)
     Bootstrap(app)
     from pathfinder import model
+
     #admin
     from .admin import admin as admin_blueprint
     app.register_blueprint(admin_blueprint,url_prefix='/admin')
-    
+
     #auth
     from .auth import auth as auth_blueprint
     app.register_blueprint(auth_blueprint)

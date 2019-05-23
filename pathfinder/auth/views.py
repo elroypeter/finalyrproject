@@ -47,7 +47,7 @@ def login():
                 return redirect(url_for('home.admin_dashboard'))
  
             #redirect to the dashboard page after login
-            return redirect(url_for('home.index'))
+            return redirect(url_for('home.admin_dashboard'))
         #when login details are incorrect
         else:
             flash('Invalid Email Or Password.')
@@ -65,4 +65,4 @@ def logout():
     flash('You have successively been logged out.')
 
     #redirect to the login page
-    return redirect(url_for('home.index'))
+    return redirect(url_for('auth.login'))

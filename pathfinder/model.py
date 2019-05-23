@@ -61,8 +61,8 @@ class CrimeScene(db.Model):
     __tablename__ = "crimescenes"
 
     id          = db.Column(db.Integer, primary_key=True)
-    longitude   = db.Column(db.String, nullable=False)
-    latitude    = db.Column(db.String, nullable=False)
+    longitude   = db.Column(db.String(128), nullable=False)
+    latitude    = db.Column(db.String(128), nullable=False)
     description  = db.Column(db.Text, nullable=False)
     image_file  = db.Column(db.String(50), nullable=True)
     date_posted = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
@@ -71,7 +71,7 @@ class CrimeScene(db.Model):
     category_id    = db.Column(db.Integer, db.ForeignKey('categories.id'), nullable=False)
     location = db.Column(db.String(60), nullable=False)
     arrest = db.Column(db.Boolean, default=False)
-    domestic = db.Column(db.Boolean)
+    domestic = db.Column(db.Boolean, default=False)
 
     def __repr__(self):
         return '<CrimeScene: {}>'.format(self.description, self.location)
@@ -83,6 +83,7 @@ class Category(db.Model):
     id = db.Column(db.Integer, primary_key = True)
     violet_type = db.Column(db.String(60), nullable=False)
     crimescene    = db.relationship('CrimeScene', backref='scene', lazy=True)
+
 
 class Police(db.Model):
 
