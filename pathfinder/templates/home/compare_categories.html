@@ -1,0 +1,72 @@
+{% extends 'layout.html' %}
+{% block content %}
+
+<script type='text/javascript'>
+ var endpoint_compare_data = '/categories/data/line'
+ var labels = []
+ var crimesdata_over_years = []
+
+ // retrieve graph data
+ $(document).ready(function(){
+Chart.defaults.global.elements.line.fill = false
+    $.ajax({
+    method:"GET",
+    url: endpoint_compare_data,
+    success: function (data) {
+      crimesdata_over_years = data.data
+      labels = data.labels
+      plot_line_graph()
+    },
+    error:function(error) {
+      console.error(error);
+    }
+  })
+
+ })
+
+  function plot_line_graph(){
+        new Chart(document.getElementById("crimes_period_chart"), {
+        type: 'line',
+        data: {
+            labels: labels,
+            datasets: crimesdata_over_years
+        },
+        options: {
+            title: {
+            display: true,
+            text: 'Comparison between crime categories'
+            }
+        }
+        })
+  }
+
+
+
+</script>
+
+    {% include '/partials/topnav.html' %}
+    {% include '/partials/mobiletop.html' %}
+    {% include '/partials/navbar.html' %}
+    <!-- Start Sale Statistic area-->
+    <div class="sale-statistic-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-9 col-md-8 col-sm-7 col-xs-12">
+                    <div class="sale-statistic-inner notika-shadow mg-tb-30">
+                        <div class="curved-inner-pro">
+                            <div class="curved-ctn">
+                                <h2>Crime Statistics from</h2><h2></h
+                                <p></p>
+                            </div>
+                        </div>
+                        <!-- <div id="Daily_chart" class="flot-chart-sts flot-chart"></div> -->
+                        <canvas id="crimes_period_chart" class="flot-chart-sts flot-chart" width="150" height="150"></canvas>
+                        <canvas id="line-chart" width="800" height="450"></canvas>
+                    </div>
+                </div> 
+            </div>
+        </div>
+    </div>
+    <!-- End Sale Statistic area-->
+
+{% endblock %}
