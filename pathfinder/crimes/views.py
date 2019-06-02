@@ -149,7 +149,7 @@ def store_excel_data():
 
 
 @crimes.route('/admin/view_crimes')
-@login_required
+# @login_required
 def view_crimes():
     allcrimes = CrimeScene.query.all()
     return render_template('crimes/view_crimes.html',

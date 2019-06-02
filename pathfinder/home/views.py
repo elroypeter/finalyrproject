@@ -129,7 +129,7 @@ def get_categories_data():
         dataset = {'data': {}, 'label': '','borderColor':''}
         dataset['label'] = category.violet_type
         dataset['borderColor'] = category.category_color
-        category_crimes = category.crimescene.order_by(CrimeScene.date_posted)
+        category_crimes = category.crimescene
         """
         find the crimes count of this category in each year
         """
