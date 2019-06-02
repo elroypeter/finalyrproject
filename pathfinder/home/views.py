@@ -5,6 +5,7 @@ from ..model import Police, User, Category, CrimeScene
 from .. import db
 from . import home
 from ..PlotData import showmap
+from datetime import datetime as dt
 
 
 @home.route('/', methods=['GET', 'POST'])
@@ -110,3 +111,57 @@ def category_crimes_data():
         crime_categories.append(category.violet_type)
         crime_categories_count.append(len(category.crimescene))
     return crime_categories, crime_categories_count
+
+
+@home.route('/admin/dashboard/crimes/comp_vis/', methods=['GET', 'POST'])
+def crime_comparision_view():
+    return render_template('home/compare_categories.html', title="Analyze Crime Categories")
+
+
+@home.route('/categories/data/line', methods=['GET'])
+def get_categories_data():
+    print('method called....')
+    date_mask = '%Y'
+    labels = []
+    category_datasets = []
+    plot_dataset = []
+    for category in Category.query.all():
+        dataset = {'data': {}, 'label': '','borderColor':''}
+        dataset['label'] = category.violet_type
+        dataset['borderColor'] = category.category_color
+        category_crimes = category.crimescene
+        """
+        find the crimes count of this category in each year
+        """
+        # map crimes count to years
+        years_data = {}
+        for category_crime in category_crimes:
+            year_of_analysis = dt.strftime(category_crime.date_posted,date_mask)
+            years_data[year_of_analysis] = years_data[year_of_analysis]+1 if year_of_analysis in years_data.keys() else 1
+        dataset['data'] = years_data
+        category_datasets.append(dataset)
+
+    #create labels
+    for dataset in category_datasets:
+        for year in dataset['data'].keys():
+            if year not in labels:
+                labels.append(year)
+
+    # build the plot dataset
+    for dataset in category_datasets:
+        label = dataset['label']
+        borderColor = dataset['borderColor']
+        data = []
+        for year in labels:
+            try:
+                count = dataset['data'][year]
+            except KeyError:
+                count = 0
+            finally:
+                data.append(count)
+        plot_dataset.append({'data':data,
+                             'label':label,
+                             'borderColor': borderColor
+                            }
+                           )
+    return jsonify({'data':plot_dataset,'labels':labels})

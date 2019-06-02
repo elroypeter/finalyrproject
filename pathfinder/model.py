@@ -70,14 +70,14 @@ class CrimeScene(db.Model):
     latitude = db.Column(db.String(128), nullable=False)
     description = db.Column(db.Text, nullable=False)
     image_file = db.Column(db.String(50), nullable=True)
-    date_posted = db.Column(db.DateTime, nullable=False,
+    date_posted = db.Column(db.Date, nullable=False,
                             default=datetime.utcnow)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     police_id = db.Column(db.Integer, db.ForeignKey(
         'police.id'), nullable=False)
     category_id = db.Column(db.Integer, db.ForeignKey(
         'categories.id'), nullable=False)
-    location = db.Column(db.String(60), nullable=False)
+    location = db.Column(db.String(300), nullable=False)
     arrest = db.Column(db.Boolean, default=False)
     domestic = db.Column(db.Boolean, default=False)
 
