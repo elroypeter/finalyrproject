@@ -131,6 +131,7 @@ def store_excel_data():
                 longitude=crime["longitude"],
                 latitude=crime["latitude"],
                 description=crime["location_description"],
+                date_posted=crime["date_posted"],
                 location=crime["location"],
                 category_id=crime["category"],
                 user_id=crime["user_id"],
