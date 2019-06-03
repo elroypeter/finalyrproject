@@ -24,7 +24,8 @@ def showmap():
     map_options = GMapOptions(
         lat=0.3476, lng=32.5825, map_type="roadmap", zoom=13)
     GOOGLE_API_KEY = "AIzaSyAFCR-n7VxtftzPKR4gCje1T-cAxQXn7S8"
-    plot = gmap(GOOGLE_API_KEY, map_options, title="Crimes visualizing center")
+    plot = gmap(GOOGLE_API_KEY, map_options,
+                title="Crimes visualizing center", height=700, width=1100)
     latitude_list, longitude_list, colors_list = get_co_ordinates()
     print(colors_list)
     source = ColumnDataSource(
