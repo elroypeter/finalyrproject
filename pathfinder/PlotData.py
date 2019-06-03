@@ -21,13 +21,14 @@ def get_co_ordinates():
 
 
 def showmap():
+    tools = "pan,wheel_zoom,box_zoom,reset,save,hover,zoom_in,box_edit,poly_draw"
+    # tools = " box_edit, box_select, box_zoom, click, crosshair, help, hover, lasso_select, pan, point_draw, poly_draw, poly_edit, poly_select, previewsave, redo, reset, save, tap, undo, wheel_zoom, xbox_select, xbox_zoom, xpan, xwheel_pan, xwheel_zoom, xzoom_in, xzoom_out, ybox_select, ybox_zoom, ypan, ywheel_pan, ywheel_zoom, yzoom_in, yzoom_out, zoom_in"
     map_options = GMapOptions(
         lat=0.3476, lng=32.5825, map_type="roadmap", zoom=13)
     GOOGLE_API_KEY = "AIzaSyAFCR-n7VxtftzPKR4gCje1T-cAxQXn7S8"
-    plot = gmap(GOOGLE_API_KEY, map_options,
+    plot = gmap(GOOGLE_API_KEY, map_options, tools=tools,
                 title="Crimes visualizing center", height=700, width=1100)
     latitude_list, longitude_list, colors_list = get_co_ordinates()
-    print(colors_list)
     source = ColumnDataSource(
         data=dict(
             lat=latitude_list,
